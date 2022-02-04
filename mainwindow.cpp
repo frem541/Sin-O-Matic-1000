@@ -27,7 +27,7 @@ void MainWindow::on_pushButton_generate_clicked()
     computeSin(start, end, step, angleType, results);
 
     ui->tableWidget_results->setRowCount(results.size());
-    for (size_t row = 0; row < ui->tableWidget_results->rowCount(); row++)
+    for (int row = 0; row < ui->tableWidget_results->rowCount(); row++)
     {
         QString  argument = "sin("+QString::number(start+step*row, 'f', ui->spinBox_argumentPrecision->value())+(angleType == DEG ? "°)" : ")");
         QString  value = QString::number(results.at(row), 'f', ui->spinBox_valuePrecision->value());
@@ -42,6 +42,20 @@ void MainWindow::on_spinBox_argumentPrecision_valueChanged(int arg1)
     ui->doubleSpinBox_start->setDecimals(ui->spinBox_argumentPrecision->value());
     ui->doubleSpinBox_end->setDecimals(ui->spinBox_argumentPrecision->value());
     ui->doubleSpinBox_step->setDecimals(ui->spinBox_argumentPrecision->value());
+    ui->doubleSpinBox_start->setSingleStep(pow(10, (-1)*ui->spinBox_argumentPrecision->value()));
+    ui->doubleSpinBox_end->setSingleStep(pow(10, (-1)*ui->spinBox_argumentPrecision->value()));
     ui->doubleSpinBox_step->setSingleStep(pow(10, (-1)*ui->spinBox_argumentPrecision->value()));
+}
+
+
+void MainWindow::on_doubleSpinBox_end_valueChanged(double arg1)
+{
+    ui->doubleSpinBox_start->setMaximum(ui->doubleSpinBox_end->value());
+}
+
+
+void MainWindow::on_doubleSpinBox_start_valueChanged(double arg1)
+{
+    ui->doubleSpinBox_end->setMinimum(ui->doubleSpinBox_start->value());
 }
 

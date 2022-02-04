@@ -20,6 +20,10 @@ private slots:
 
     void on_spinBox_argumentPrecision_valueChanged(int arg1);
 
+    void on_doubleSpinBox_end_valueChanged(double arg1);
+
+    void on_doubleSpinBox_start_valueChanged(double arg1);
+
 private:
     Ui::MainWindow *ui;
 };
